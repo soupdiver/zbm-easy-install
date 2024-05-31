@@ -31,7 +31,9 @@ deb-src http://ftp.de.debian.org/debian bookworm-updates main contrib
 deb http://ftp.de.debian.org/debian bookworm-backports main contrib
 deb-src http://ftp.de.debian.org/debian bookworm-backports main contrib
 EOF
-else if [ $os == "ubuntu" ]; then
+fi
+
+if [ $os == "ubuntu" ]; then
     cat <<EOF > /etc/apt/sources.list
 # Uncomment the deb-src entries if you need source packages
 
