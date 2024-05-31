@@ -9,6 +9,7 @@ BOOT_DEVICE=$5
 POOL_DEVICE=$6
 HOSTNAME=$7
 ROOT_PASSWORD=$8
+OS=$9
 
 # echo $HOSTNAME > /etc/hostname
 echo -e "127.0.1.1\t$HOSTNAME" >> /etc/hosts
@@ -17,7 +18,7 @@ echo -e "127.0.1.1\t$HOSTNAME" >> /etc/hosts
 
 export DEBIAN_FRONTEND=noninteractive
 
-if [ $os == "debian" ]; then
+if [ $OS == "debian" ]; then
     cat <<EOF > /etc/apt/sources.list
 deb http://ftp.de.debian.org/debian bookworm main contrib
 deb-src http://ftp.de.debian.org/debian bookworm main contrib
@@ -33,7 +34,7 @@ deb-src http://ftp.de.debian.org/debian bookworm-backports main contrib
 EOF
 fi
 
-if [ $os == "ubuntu" ]; then
+if [ $OS == "ubuntu" ]; then
     cat <<EOF > /etc/apt/sources.list
 # Uncomment the deb-src entries if you need source packages
 
