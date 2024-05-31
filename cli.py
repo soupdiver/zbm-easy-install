@@ -81,7 +81,7 @@ def main():
                     '/bin/bash',
                     '-c',
                     f"{configure_os_script} {boot_disk} {pool_disk}
-                       ˝ {boot_part} {pool_part} {boot_device} {pool_device} {hostname} {root_password}"
+                        {boot_part} {pool_part} {boot_device} {pool_device} {hostname} {root_password}"
                     ], check=True)
 
     configure_os_script = f"./50-install-zbm.sh"
