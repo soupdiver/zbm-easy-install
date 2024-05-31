@@ -75,8 +75,9 @@ def main():
                    root_password, hostname], check=True)
 
     # Call the configure_{os}.sh script
-    c_os_script = f"./40-configure*.sh"
-    for file in glob.glob(c_os_script):
+    c_os_script = f"./40-configure_{os}.sh"
+    c_globs = f"./40-configure*.sh"
+    for file in glob.glob(c_globs):
         shutil.copy(file, "/mnt")
     subprocess.run(['chroot',
                     '/mnt',
