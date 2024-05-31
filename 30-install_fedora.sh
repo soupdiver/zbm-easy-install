@@ -33,5 +33,6 @@ rm -f /mnt/etc/resolv.conf || true
 cp -L /etc/resolv.conf /mnt/etc/resolv.conf
 cp /etc/hostid /mnt/etc
 
+# workaround SELinux and chaning root password foo
 setenforce 0
 mount -o remount rw /mnt
