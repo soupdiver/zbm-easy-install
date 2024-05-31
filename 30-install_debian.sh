@@ -23,8 +23,8 @@ esac
 
 debootstrap $os /mnt $mirror
 
-mount --bind /proc /mnt/proc
-mount --bind /sys /mnt/sys
+mount -t proc /proc /mnt/proc
+mount -t sysfs /sys /mnt/sys
 mount --bind /dev /mnt/dev
 mount --bind /dev/pts /mnt/dev/pts
 
