@@ -5,12 +5,15 @@ os=$1
 ROOT_PASSWORD=$2
 HOSTNAME=$3
 
+mirror=""
+
 case $os in
     debian)
         os="bookworm"
         ;;
     ubuntu)
         os="jammy"
+        mirror="http://de.archive.ubuntu.com/ubuntu/"
         ;;
     *)
         echo "OS $os not supported"
@@ -18,7 +21,7 @@ case $os in
         ;;
 esac
 
-debootstrap $os /mnt
+debootstrap $os /mnt $mirror
 
 mount --bind /proc /mnt/proc
 mount --bind /sys /mnt/sys
