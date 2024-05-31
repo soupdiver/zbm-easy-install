@@ -74,23 +74,22 @@ def main():
                    root_password, hostname], check=True)
 
     # Call the install_{os}.sh script
-    configure_os_script = f"./40-configure_{os_type}.sh"
-    shutil.copy(configure_os_script, f"/mnt/40-configure_{os_type}.sh")
+    c_os_script = f"./40-configure_{os_type}.sh"
+    shutil.copy(c_os_script, f"/mnt/40-configure_{os_type}.sh")
     subprocess.run(['chroot',
                     '/mnt',
                     '/bin/bash',
                     '-c',
-                    f"{configure_os_script} {boot_disk} {pool_disk}
-                        {boot_part} {pool_part} {boot_device} {pool_device} {hostname} {root_password}"
+                    f"{c_os_script} {boot_disk} {pool_disk} {boot_part} {pool_part} {boot_device} {pool_device} {hostname} {root_password}"
                     ], check=True)
 
-    configure_os_script = f"./50-install-zbm.sh"
-    shutil.copy(configure_os_script, f"/mnt/50-install-zbm.sh")
+    c_os_script = f"./50-install-zbm.sh"
+    shutil.copy(c_os_script, f"/mnt/50-install-zbm.sh")
     subprocess.run(['chroot',
                     '/mnt',
                     '/bin/bash',
                     '-c',
-                    f"{configure_os_script} {boot_disk} {pool_disk} {boot_part} {
+                    f"{c_os_script} {boot_disk} {pool_disk} {boot_part} {
                         pool_part} {boot_device} {pool_device} {hostname} {root_password}"
                     ], check=True)
 
