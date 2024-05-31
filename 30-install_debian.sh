@@ -28,22 +28,5 @@ mount -t sysfs /sys /mnt/sys
 mount --bind /dev /mnt/dev
 mount --bind /dev/pts /mnt/dev/pts
 
-# cp /etc/hostid /mnt/etc
+cp /etc/hostid /mnt/etc
 cp /etc/resolv.conf /mnt/etc
-
-echo systemd-firstboot \
---root=/mnt \
---locale=en_US.UTF-8 \
---hostname=$HOSTNAME \
---root-password=$ROOT_PASSWORD \
---setup-machine-id
-
-systemd-firstboot \
---root=/mnt \
---locale=en_US.UTF-8 \
---hostname=$HOSTNAME \
---root-password=$ROOT_PASSWORD \
---setup-machine-id
-
-#--keymap=tr-intl \
-#--timezone=Europe/Istanbul \

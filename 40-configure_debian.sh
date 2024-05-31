@@ -11,13 +11,11 @@ HOSTNAME=$7
 ROOT_PASSWORD=$8
 OS=$9
 
-# echo $HOSTNAME > /etc/hostname
-echo -e "127.0.1.1\t$HOSTNAME" >> /etc/hosts
-if [ $OS == "ubuntu" ]; then
-    echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd root
-fi
-
 export DEBIAN_FRONTEND=noninteractive
+
+echo $HOSTNAME > /etc/hostname
+echo -e "127.0.1.1\t$HOSTNAME" >> /etc/hosts
+echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd root
 
 if [ $OS == "debian" ]; then
     cat <<EOF > /etc/apt/sources.list
