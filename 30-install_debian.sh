@@ -7,10 +7,10 @@ HOSTNAME=$3
 
 case $os in
     debian)
-        os = "bookworm"
+        os="bookworm"
         ;;
     ubuntu)
-        os = "jammy"
+        os="jammy"
         ;;
     *)
         echo "OS $os not supported"
