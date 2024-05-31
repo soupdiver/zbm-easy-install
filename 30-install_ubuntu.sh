@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./install_debian.sh $1 $2 $3
+./30-install_debian.sh $1 $2 $3
