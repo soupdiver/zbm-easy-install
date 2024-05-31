@@ -7,6 +7,7 @@ The goal is to provide an easy installation routine to setup a new machine with 
 ## Usage
 
 1. Start a Debian or Fedora live system from an iso image
+1. `sudo -i`
 1. `git clone https://github.com/soupdiver/zbm-easy-install`
 1. `python3 cli.py --boot-disk /dev/BOOTDISK --boot-partition 1 --pool-disk /dev/POOLDISK --pool-partition 2 --hostname foohost --os debian --root-password "12"`
 
