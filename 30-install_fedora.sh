@@ -22,7 +22,7 @@ mkdir /mnt/dev/pts || true
 mount --bind /proc /mnt/proc
 mount --bind /sys /mnt/sys
 mount --bind /dev /mnt/dev
-mount --bind pts /mnt/dev/pts
+mount --bind /dev/pts /mnt/dev/pts
 mount -o remount rw /mnt
 
 dnf --releasever=${VERSION_ID} -y --installroot=/mnt install kernel grub2
