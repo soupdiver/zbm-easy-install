@@ -14,7 +14,7 @@ source /etc/os-release
 
 # needed to set password, not 100% sure why though
 # https://askubuntu.com/a/514959
-restorecon -v /etc/shadow
+chmod 600 /etc/shadow
 echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd root
 
 cat << EOF > /etc/dracut.conf.d/zol.conf
