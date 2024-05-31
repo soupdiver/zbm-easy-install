@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+os = $1
+ROOT_PASSWORD = $2
+HOSTNAME = $3
+
 source /etc/os-release
 export ID
 

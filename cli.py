@@ -16,7 +16,7 @@ def parse_args():
     parser.add_argument('--pool-partition', required=True,
                         type=int, help='The pool partition number, e.g., 2')
     parser.add_argument('--os', required=True,
-                        choices=['debian', 'fedora'], help='The operating system to install')
+                        choices=['debian', 'fedora', 'ubuntu'], help='The operating system to install')
     parser.add_argument('--hostname', required=True,
                         help='The hostname for the new system')
     parser.add_argument('--root-password', required=True,
@@ -62,15 +62,16 @@ def main():
     print(f'OS: {os_type}')
     print(f'HOSTNAME: {hostname}')
 
-    prepare_disks_script = f"./10-prepare_live_{os_type}.sh"
-    subprocess.run([prepare_disks_script], check=True)
+    prepare_live_script = f"./10-prepare_live_{os_type}.sh"
+    subprocess.run([prepare_live_script], check=True)
 
     prepare_disks_script = f"./20-prepare_disks.sh"
     subprocess.run([prepare_disks_script, boot_disk, pool_disk,
                    str(boot_partition), str(pool_partition), pool_device], check=True)
 
-    prepare_disks_script = f"./30-install_{os_type}.sh"
-    subprocess.run([prepare_disks_script], check=True)
+    install_os_script = f"./30-install_{os_type}.sh"
+    subprocess.run([install_os_script, os_type,
+                   root_password, hostname], check=True)
 
     # Call the install_{os}.sh script
     configure_os_script = f"./40-configure_{os_type}.sh"

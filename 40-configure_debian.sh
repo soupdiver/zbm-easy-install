@@ -10,10 +10,10 @@ POOL_DEVICE=$6
 HOSTNAME=$7
 ROOT_PASSWORD=$8
 
-echo $HOSTNAME > /etc/hostname
+# echo $HOSTNAME > /etc/hostname
 echo -e "127.0.1.1\t$HOSTNAME" >> /etc/hosts
 
-echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd root
+# echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd root
 
 export DEBIAN_FRONTEND=noninteractive
 

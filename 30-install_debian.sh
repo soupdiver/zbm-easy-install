@@ -1,12 +1,39 @@
 #!/bin/bash
 set -e
 
-debootstrap bookworm /mnt
+os = $1
+ROOT_PASSWORD = $2
+HOSTNAME = $3
 
-cp /etc/hostid /mnt/etc
+case $os in
+    debian)
+        os = "bookworm"
+        ;;
+    ubuntu)
+        os = "jammy"
+        ;;
+    *)
+        echo "OS $os not supported"
+        exit 1
+        ;;
+esac
+
+debootstrap $os /mnt
+
+mount --bind /proc /mnt/proc
+mount --bind /sys /mnt/sys
+mount --bind /dev /mnt/dev
+mount --bind /dev/pts /mnt/dev/pts
+
+# cp /etc/hostid /mnt/etc
 cp /etc/resolv.conf /mnt/etc
 
-mount -t proc proc /mnt/proc
-mount -t sysfs sys /mnt/sys
-mount -B /dev /mnt/dev
-mount -t devpts pts /mnt/dev/pts
+systemd-firstboot \
+--root=/mnt \
+--locale=en_US.UTF-8 \
+--hostname=$HOSTNAME \
+--root-password=$ROOT_PASSWORD \
+--setup-machine-id
+
+#--keymap=tr-intl \
+#--timezone=Europe/Istanbul \
