@@ -16,6 +16,7 @@ source /etc/os-release
 # https://askubuntu.com/a/514959
 
 chmod 600 /etc/shadow
+touch /etc/shadow
 echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd root
 
 restorecon -v /etc/shadow
