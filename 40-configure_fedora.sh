@@ -17,9 +17,9 @@ source /etc/os-release
 
 # chmod 600 /etc/{shadow,passwd}
 # touch /etc/{shadow,passwd}
-echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd root
 
-restorecon -v /etc/{shadow,passwd}
+echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd root
+restorecon -v /etc/shadow
 
 cat << EOF > /etc/dracut.conf.d/zol.conf
 nofsck="yes"
