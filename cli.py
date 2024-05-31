@@ -1,6 +1,7 @@
 import subprocess
 import argparse
 import os
+import glob
 import shutil
 
 
@@ -75,12 +76,14 @@ def main():
 
     # Call the configure_{os}.sh script
     c_os_script = f"./40-configure*.sh"
-    shutil.copy(c_os_script, f"/mnt/")
+    for file in glob.glob(c_os_script):
+        shutil.copy(file, "/mnt")
     subprocess.run(['chroot',
                     '/mnt',
                     '/bin/bash',
                     '-c',
-                    f"{c_os_script} {boot_disk} {pool_disk} {boot_part} {pool_part} {boot_device} {pool_device} {hostname} {root_password}"
+                    f"{c_os_script} {boot_disk} {pool_disk} {boot_part} {pool_part} {
+                        boot_device} {pool_device} {hostname} {root_password}"
                     ], check=True)
 
     c_os_script = f"./50-install-zbm.sh"
@@ -89,7 +92,8 @@ def main():
                     '/mnt',
                     '/bin/bash',
                     '-c',
-                    f"{c_os_script} {boot_disk} {pool_disk} {boot_part} {pool_part} {boot_device} {pool_device} {hostname} {root_password}"
+                    f"{c_os_script} {boot_disk} {pool_disk} {boot_part} {pool_part} {
+                        boot_device} {pool_device} {hostname} {root_password}"
                     ], check=True)
 
     # Call the post_install.sh script
