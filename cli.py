@@ -91,8 +91,7 @@ def main():
                     '/mnt',
                     '/bin/bash',
                     '-c',
-                    f"{c_os_script} {boot_disk} {pool_disk} {boot_part} {pool_part} {
-                        boot_device} {pool_device} {hostname} {root_password}"
+                    f"{c_os_script} {boot_disk} {pool_disk} {boot_part} {pool_part} {boot_device} {pool_device} {hostname} {root_password}"
                     ], check=True)
 
     # Call the post_install.sh script
