@@ -1,4 +1,4 @@
 #!/bin/bash
 
 umount -l -R /mnt
-zpool destroy rpool
+zpool destroy zroot
