@@ -12,7 +12,7 @@ case $os in
         os="bookworm"
         ;;
     ubuntu)
-        os="numbat"
+        os="jammy"
         mirror="http://de.archive.ubuntu.com/ubuntu/"
         ;;
     *)
