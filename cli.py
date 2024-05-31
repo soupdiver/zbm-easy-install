@@ -30,34 +30,34 @@ def main():
 
     boot_disk = args.boot_disk
     pool_disk = args.pool_disk
-    boot_partition = args.boot_partition
-    pool_partition = args.pool_partition
+    boot_part = args.boot_partition
+    pool_part = args.pool_partition
     os_type = args.os
     hostname = args.hostname
     root_password = args.root_password
 
     # Detect if the user specified the same disk for boot and pool
-    if boot_disk == pool_disk and boot_partition == pool_partition:
+    if boot_disk == pool_disk and boot_part == pool_part:
         raise ValueError(
             'Boot and pool partitions must be different if they are on the same disk.')
 
     # Handle NVMe devices
     if boot_disk.startswith('/dev/nvme'):
-        boot_device = f'{boot_disk}p{boot_partition}'
+        boot_device = f'{boot_disk}p{boot_part}'
     else:
-        boot_device = f'{boot_disk}{boot_partition}'
+        boot_device = f'{boot_disk}{boot_part}'
 
     if pool_disk.startswith('/dev/nvme'):
-        pool_device = f'{pool_disk}p{pool_partition}'
+        pool_device = f'{pool_disk}p{pool_part}'
     else:
-        pool_device = f'{pool_disk}{pool_partition}'
+        pool_device = f'{pool_disk}{pool_part}'
 
     # Print the extracted variables (for debugging purposes)
     print(f'BOOT_DISK: {boot_disk}')
-    print(f'BOOT_PART: {boot_partition}')
+    print(f'BOOT_PART: {boot_part}')
     print(f'BOOT_DEVICE: {boot_device}')
     print(f'POOL_DISK: {pool_disk}')
-    print(f'POOL_PART: {pool_partition}')
+    print(f'POOL_PART: {pool_part}')
     print(f'POOL_DEVICE: {pool_device}')
     print(f'OS: {os_type}')
     print(f'HOSTNAME: {hostname}')
@@ -67,7 +67,7 @@ def main():
 
     prepare_disks_script = f"./20-prepare_disks.sh"
     subprocess.run([prepare_disks_script, boot_disk, pool_disk,
-                   str(boot_partition), str(pool_partition), pool_device], check=True)
+                   str(boot_part), str(pool_part), pool_device], check=True)
 
     install_os_script = f"./30-install_{os_type}.sh"
     subprocess.run([install_os_script, os_type,
@@ -80,8 +80,8 @@ def main():
                     '/mnt',
                     '/bin/bash',
                     '-c',
-                    f"{configure_os_script} {boot_disk} {pool_disk} {boot_partition} {
-                        pool_partition} {boot_device} {pool_device} {hostname} {root_password}"
+                    f"{configure_os_script} {boot_disk} {pool_disk}
+                       ˝ {boot_part} {pool_part} {boot_device} {pool_device} {hostname} {root_password}"
                     ], check=True)
 
     configure_os_script = f"./50-install-zbm.sh"
@@ -90,8 +90,8 @@ def main():
                     '/mnt',
                     '/bin/bash',
                     '-c',
-                    f"{configure_os_script} {boot_disk} {pool_disk} {boot_partition} {
-                        pool_partition} {boot_device} {pool_device} {hostname} {root_password}"
+                    f"{configure_os_script} {boot_disk} {pool_disk} {boot_part} {
+                        pool_part} {boot_device} {pool_device} {hostname} {root_password}"
                     ], check=True)
 
     # Call the post_install.sh script
