@@ -1,8 +1,4 @@
 #!/bin/bash
 set -e
 
-source /etc/os-release
-export ID
-
-apt update
-apt install debootstrap gdisk zfsutils-linux
+./10-prepare_live_debian.sh
