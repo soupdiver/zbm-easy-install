@@ -90,7 +90,7 @@ def main():
                     '/bin/bash',
                     '-c',
                     f"{configure_os_script} {boot_disk} {pool_disk} {boot_partition} {
-                        pool_partition} {boot_device} {pool_device} {hostname} {root_password}"
+                        pool_partition} {boot_device}{pool_device} {hostname} {root_password}"
                     ], check=True)
 
     # Call the post_install.sh script
@@ -103,4 +103,5 @@ def main():
 
 
 if __name__ == '__main__':
+    # print('Running cli.py')
     main()

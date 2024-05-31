@@ -1,0 +1,2 @@
+python3 cli.py --boot-disk /dev/sda --boot-partition 1 --pool-disk /dev/sda --pool-partition 2 --hostname foohost --os fedora --root-password "12"
+python3 cli.py --boot-disk /dev/nvme0n1 --boot-partition 1 --pool-disk /dev/nvme0n1 --pool-partition 2 --hostname foohost --os fedora --root-password "12"
