@@ -19,10 +19,11 @@ mkdir /mnt/sys || true
 mkdir /mnt/dev || true
 mkdir /mnt/dev/pts || true
 
-mount -t proc proc /mnt/proc
-mount -t sysfs sys /mnt/sys
-mount -B /dev /mnt/dev
-mount -t devpts pts /mnt/dev/pts
+mount --bind /proc /mnt/proc
+mount --bind /sys /mnt/sys
+mount --bind /dev /mnt/dev
+mount --bind pts /mnt/dev/pts
+mount -o remount rw /mnt
 
 dnf --releasever=${VERSION_ID} -y --installroot=/mnt install kernel grub2
 dnf --releasever=${VERSION_ID} -y --installroot=/mnt groupinstall "Minimal Install"
