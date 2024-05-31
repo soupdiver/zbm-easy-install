@@ -58,11 +58,19 @@ fi
 apt update
 apt install -y nala
 
-nala install -y locales keyboard-configuration console-setup
-dpkg-reconfigure locales tzdata keyboard-configuration console-setup
+if [ $OS == "debian" ]; then
+    nala install -y locales keyboard-configuration console-setup
+    dpkg-reconfigure locales tzdata keyboard-configuration console-setup
 
-nala install -y linux-headers-amd64 linux-image-amd64 zfs-initramfs dosfstools
-echo "REMAKE_INITRD=yes" > /etc/dkms/zfs.conf
+    nala install -y linux-headers-amd64 linux-image-amd64 zfs-initramfs dosfstools
+    echo "REMAKE_INITRD=yes" > /etc/dkms/zfs.conf
+fi
+
+if [ $OS == "ubuntu" ]; then
+    nala install -y --no-install-recommends linux-generic locales keyboard-configuration console-setup
+    dpkg-reconfigure locales tzdata keyboard-configuration console-setup
+    nala install -y dosfstools zfs-initramfs zfsutils-linux
+fi
 
 systemctl enable zfs.target
 systemctl enable zfs-import-cache
