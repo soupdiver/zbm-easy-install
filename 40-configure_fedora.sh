@@ -37,3 +37,5 @@ dnf install -y zfs zfs-dracut efibootmgr curl
 dnf config-manager --enable updates
 
 dracut --force --regenerate-all
+
+fixfiles -F onboot
