@@ -73,9 +73,9 @@ def main():
     subprocess.run([install_os_script, os_type,
                    root_password, hostname], check=True)
 
-    # Call the install_{os}.sh script
-    c_os_script = f"./40-configure_{os_type}.sh"
-    shutil.copy(c_os_script, f"/mnt/40-configure_{os_type}.sh")
+    # Call the configure_{os}.sh script
+    c_os_script = f"./40-configure*.sh"
+    shutil.copy(c_os_script, f"/mnt/")
     subprocess.run(['chroot',
                     '/mnt',
                     '/bin/bash',
