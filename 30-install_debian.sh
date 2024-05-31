@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-os = $1
-ROOT_PASSWORD = $2
-HOSTNAME = $3
+os=$1
+ROOT_PASSWORD=$2
+HOSTNAME=$3
 
 case $os in
     debian)
