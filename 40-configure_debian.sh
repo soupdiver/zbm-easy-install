@@ -17,7 +17,8 @@ echo -e "127.0.1.1\t$HOSTNAME" >> /etc/hosts
 
 export DEBIAN_FRONTEND=noninteractive
 
-cat <<EOF > /etc/apt/sources.list
+if [ $os == "debian" ]; then
+    cat <<EOF > /etc/apt/sources.list
 deb http://ftp.de.debian.org/debian bookworm main contrib
 deb-src http://ftp.de.debian.org/debian bookworm main contrib
 
@@ -30,6 +31,26 @@ deb-src http://ftp.de.debian.org/debian bookworm-updates main contrib
 deb http://ftp.de.debian.org/debian bookworm-backports main contrib
 deb-src http://ftp.de.debian.org/debian bookworm-backports main contrib
 EOF
+else if [ $os == "ubuntu" ]; then
+    cat <<EOF > /etc/apt/sources.list
+# Uncomment the deb-src entries if you need source packages
+
+deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
+# deb-src http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
+
+deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
+# deb-src http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
+
+deb http://archive.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+# deb-src http://archive.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+
+deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+# deb-src http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+
+deb http://archive.canonical.com/ubuntu/ jammy partner
+# deb-src http://archive.canonical.com/ubuntu/ jammy partner
+EOF
+fi
 
 apt update
 apt install -y nala
