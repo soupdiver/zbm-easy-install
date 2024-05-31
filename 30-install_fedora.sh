@@ -23,7 +23,6 @@ mount --bind /proc /mnt/proc
 mount --bind /sys /mnt/sys
 mount --bind /dev /mnt/dev
 mount --bind /dev/pts /mnt/dev/pts
-mount -o remount rw /mnt
 
 dnf --releasever=${VERSION_ID} -y --installroot=/mnt install kernel grub2
 dnf --releasever=${VERSION_ID} -y --installroot=/mnt groupinstall "Minimal Install"
@@ -33,3 +32,6 @@ dnf --releasever=${VERSION_ID} -y --installroot=/mnt install dnf
 rm -f /mnt/etc/resolv.conf || true
 cp -L /etc/resolv.conf /mnt/etc/resolv.conf
 cp /etc/hostid /mnt/etc
+
+setenforce 0
+mount -o remount rw /mnt

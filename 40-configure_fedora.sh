@@ -15,11 +15,11 @@ source /etc/os-release
 # needed to set password, not 100% sure why though
 # https://askubuntu.com/a/514959
 
-chmod 600 /etc/shadow
-touch /etc/shadow
+chmod 600 /etc/{shadow,passwd}
+touch /etc/{shadow,passwd}
 echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd root
 
-restorecon -v /etc/shadow
+restorecon -v /etc/{shadow,passwd}
 
 cat << EOF > /etc/dracut.conf.d/zol.conf
 nofsck="yes"
