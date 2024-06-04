@@ -63,6 +63,8 @@ def main():
     print(f'OS: {os_type}')
     print(f'HOSTNAME: {hostname}')
 
+    confirm_deletion(boot_disk, pool_disk)
+
     live_os = get_os_id()
 
     prepare_live_script = f"./10-prepare_live_{live_os}.sh"
@@ -106,6 +108,16 @@ def main():
     # os.remove('/mnt/configure_os.sh')
 
     print('ZFS BootMenu installation complete.\nPlease reboot the system.')
+
+
+def confirm_deletion(boot_disk, pool_disk):
+    print(f"WARNING: The following disks will be formatted and all data will be lost:")
+    print(f"  Boot Disk: {boot_disk}")
+    print(f"  Pool Disk: {pool_disk}")
+    response = input("Do you want to proceed? (y/n): ").strip().lower()
+    if response != 'y':
+        print("Operation aborted.")
+        exit(1)
 
 
 def get_os_id():
