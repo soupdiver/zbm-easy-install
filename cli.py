@@ -63,7 +63,9 @@ def main():
     print(f'OS: {os_type}')
     print(f'HOSTNAME: {hostname}')
 
-    prepare_live_script = f"./10-prepare_live_{os_type}.sh"
+    live_os = get_os_id()
+
+    prepare_live_script = f"./10-prepare_live_{live_os}.sh"
     subprocess.run([prepare_live_script], check=True)
 
     prepare_disks_script = f"./20-prepare_disks.sh"
@@ -78,7 +80,7 @@ def main():
     c_globs = f"./40-configure*.sh"
     for file in glob.glob(c_globs):
         shutil.copy(file, "/mnt")
-    
+
     # Call the configure_{os_type}.sh script
     c_os_script = f"./40-configure_{os_type}.sh"
     subprocess.run(['chroot',
@@ -104,6 +106,20 @@ def main():
     # os.remove('/mnt/configure_os.sh')
 
     print('ZFS BootMenu installation complete.\nPlease reboot the system.')
+
+
+def get_os_id():
+    os_release_file = '/etc/os-release'
+    try:
+        with open(os_release_file, 'r') as file:
+            for line in file:
+                if line.startswith('ID='):
+                    return line.strip().split('=')[1].strip('"')
+    except FileNotFoundError:
+        print(f"File {os_release_file} not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    return None
 
 
 if __name__ == '__main__':
